@@ -1,0 +1,16 @@
+matplotlib
+numpy
+pandas
+pyarrow
+scikit-learn
+scipy
+seaborn
+PySimpleGUI==4.60.5
+pynput
+tqdm
+torcheval
+torchinfo
+jupyterlab
+ipynb
+onnx
+git+https://github.com/eml-eda/plinio.git@main#egg=plinio
