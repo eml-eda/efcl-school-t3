@@ -16,11 +16,16 @@ It mainly consists of some Jupyter notebooks, plus some support scripts. The not
 
 ## Prerequisites and General information
 
+Move to the work folder: `cd /usr/itetnas04/data-scratch-01/$USER/data/`
+
+Clone the repository.
+
+
 ### Download the dataset
 
 The first step to setup the hands-on is to download our pre-collected dataset from [this](https://www.dropbox.com/scl/fi/yucxd67gvdkb5vl7tw0th/dataset.zip?rlkey=gf7gje37fhet26z5t6hq0tv0z&st=8rbzte7m&dl=0) link. When requested, use the password that we will provide you during the labs.
 
-Save the dataset under `<GIT_FOLDER>/dataset`.
+The dataset is already downloaded under: `/usr/itetnas04/data-scratch-01/efcl_007fs24/data/dataset`
 
 ### Start conda environment
 
