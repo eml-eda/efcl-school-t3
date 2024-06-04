@@ -92,16 +92,13 @@ We will then pick one lucky winner DNN, which *all groups* will use for the pers
 
 ## Hands-on #2
 
-You will run Hands-on #2 locally, using the BioGAP for data acquisition and a terminal to run the associated scripts. 
-
-Create a local copy of your repository to access the data acquisition scripts.
+You will run Hands-on #2 locally, using the BioGAP for data acquisition and a terminal to run the associated scripts. The resources required for this session are already available for you in `/scratch/$USER` of your `tardis` machines.
 
 ```
-mkdir -p /scratch/$USER && cp -r /usr/itetnas04/data-scratch-01/$USER/data/efcl-school-t3/ /scratch/$USER
-cd /scratch/$USER/efcl-school-t3/
+cd /scratch/$USER/
 ```
 
-Make sure to activate the conda environment in the terminal, as described above. The remaining instructions are available in the associated notebook.
+Make sure to activate the conda environment in the terminal, as described above. The remaining instructions are available in the associated notebook from the cloned folder.
 
 ## Hands-on #3
 
@@ -140,15 +137,13 @@ and selecting `efcl_venv` when starting your notebook. To do so, open the "Kerne
 
 ## Hands-on #5
 
-You will run Hands-on #5 locally, using the BioGAP for data acquisition, a terminal to run the acquisition script, and another terminal to compute and display the predicted gestures. 
+You will run Hands-on #5 locally, using the BioGAP for data acquisition, a terminal to run the acquisition script, and another terminal to compute and display the predicted gestures. The resources required for this session are already available for you in `/scratch/$USER` of your `tardis` machines.
 
 ```
-cd /scratch/$USER/efcl-school-t3/
+cd /scratch/$USER/
 ```
 
-
-
-Make sure to activate the conda environment in the terminals, as described above. The remaining instructions are available in the associated notebook.
+Make sure to activate the conda environment in the terminals, as described above. The remaining instructions are available in the associated notebook from the cloned folder.
 
 
 
