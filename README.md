@@ -14,16 +14,32 @@ It mainly consists of some Jupyter notebooks, plus some support scripts. The not
 
 **Hands-On #5**: `hands_on_5.ipynb`
 
+### Sanity steps
+
+Although all packages are already installed for your accounts, it is advisable to set the cache's location to the local scratch disk to avoid using up quota: 
+
+```
+mkdir -p /scratch/$USER/pip_cache
+```
+
+Temporarily set the environment variable to tell pip to use a different cache location:
+
+```
+export PIP_CACHE_DIR=/scratch/$USER/pip_cache/
+```
+
 ## Prerequisites and General information
 
-Move to the work folder: `cd /usr/itetnas04/data-scratch-01/$USER/data/`
+Unless instructed otherwise, you will work from a remote working directory: 
 
-Clone the repository.
+```
+cd /usr/itetnas04/data-scratch-01/$USER/data/
+```
+
+Clone the repository in the working directory.
 
 
 ### Download the dataset
-
-The first step to setup the hands-on is to download our pre-collected dataset from [this](https://www.dropbox.com/scl/fi/yucxd67gvdkb5vl7tw0th/dataset.zip?rlkey=gf7gje37fhet26z5t6hq0tv0z&st=8rbzte7m&dl=0) link. When requested, use the password that we will provide you during the labs.
 
 The dataset is already downloaded under: `/usr/itetnas04/data-scratch-01/efcl_007fs24/data/dataset`
 
@@ -76,7 +92,16 @@ We will then pick one lucky winner DNN, which *all groups* will use for the pers
 
 ## Hands-on #2
 
-You will run Hands-on #2 locally, using the BioGAP for data acquisition and a terminal to run the associated scripts. Make sure to activate the conda environment in the terminal, as described above. The instructions are available in the associated notebook.
+You will run Hands-on #2 locally, using the BioGAP for data acquisition and a terminal to run the associated scripts. 
+
+Create a local copy of your repository to access the data acquisition scripts.
+
+```
+mkdir -p /scratch/$USER && cp -r /usr/itetnas04/data-scratch-01/$USER/data/efcl-school-t3/ /scratch/$USER
+cd /scratch/$USER/efcl-school-t3/
+```
+
+Make sure to activate the conda environment in the terminal, as described above. The remaining instructions are available in the associated notebook.
 
 ## Hands-on #3
 
@@ -115,7 +140,15 @@ and selecting `efcl_venv` when starting your notebook. To do so, open the "Kerne
 
 ## Hands-on #5
 
-You will run Hands-on #2 locally, using the BioGAP for data acquisition, a terminal to run the acquisition script, and another terminal to compute and display the predicted gestures. Make sure to activate the conda environment in the terminals, as described above. The instructions are available in the associated notebook.
+You will run Hands-on #5 locally, using the BioGAP for data acquisition, a terminal to run the acquisition script, and another terminal to compute and display the predicted gestures. 
+
+```
+cd /scratch/$USER/efcl-school-t3/
+```
+
+
+
+Make sure to activate the conda environment in the terminals, as described above. The remaining instructions are available in the associated notebook.
 
 
 
