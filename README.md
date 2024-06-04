@@ -1,4 +1,4 @@
-# EFCL Summer School 2024 - Track 3 - Hands On
+ # EFCL Summer School 2024 - Track 3 - Hands On
 
 This repository contains the material for the Track 3 Hands-on Sessions.
 
@@ -67,7 +67,7 @@ export SLURM_CONF=/home/sladmsnow/slurm/slurm.conf
 srun --time 300 --gres=gpu:1 --pty bash -i
 ```
 
-You can now reactivate your conda environment and start your jupyter lab session on the GPU.
+You can now reactivate your conda environment and start your jupyter lab session on the GPU from the cloned folder.
 
 **IMPORTANT**: for sake of time, each group will generate a single Optimized DNN (rather than a full Pareto front) during the hands-on session. The instructors will tell you what value to try. Once done, you will have to upload the optimized **and finetuned** model to [this](https://www.dropbox.com/request/IRUUGGAlAZ4ShAWPr8MF) link, specifying your group name (pick the name that you want, just no vulgarity please &#128515;). 
 
