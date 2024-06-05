@@ -128,7 +128,7 @@ cp -r /home/gap_sdk_private/ /scratch/$USER/
 cp -r /home/match/ /scratch/$USER/
 cp -r /home/match_gap9/ /scratch/$USER/
 
-cd /home/$USER/<GIT_FOLDER>
+cd /scratch/$USER/efcl-school-t3
 ```
 
 You can now start the jupyer lab session in the apptainer. Make sure you are using the correct kernel by running:
@@ -141,7 +141,7 @@ and selecting `efcl_venv` when starting your notebook. To do so, open the "Kerne
 
 ## Hands-on #5
 
-You will run Hands-on #5 locally, using the BioGAP for data acquisition, a terminal to run the acquisition script, and another terminal to compute and display the predicted gestures. The resources required for this session are already available for you in `/scratch/$USER` of your `tardis` machines.
+You will run Hands-on #5 locally, using the BioGAP for data acquisition, a terminal to run the acquisition script, and another terminal to compute and display the predicted gestures. The resources required for this session are already available for you in `/scratch/$USER` of your `tardis` machines, copied by you in Hands-on #4.
 
 ```
 cd /scratch/$USER/
