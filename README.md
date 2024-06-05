@@ -144,7 +144,7 @@ and selecting `efcl_venv` when starting your notebook. To do so, open the "Kerne
 You will run Hands-on #5 locally, using the BioGAP for data acquisition, a terminal to run the acquisition script, and another terminal to compute and display the predicted gestures. The resources required for this session are already available for you in `/scratch/$USER` of your `tardis` machines, copied by you in Hands-on #4.
 
 ```
-cd /scratch/$USER/
+cd /scratch/$USER/efcl-school-t3
 ```
 
 Make sure to activate the conda environment in the terminals, as described above. The remaining instructions are available in the associated notebook from the cloned folder.
