@@ -108,7 +108,11 @@ Connect to the GPU as you did in Hands-on #1, activate the conda environment, an
 
 ### Initialize Apptainer
 
-The requirements for Hands-on #4 are more complex, as you are expected to cross-compile an application for a RISC-V architecture. The SDK you will use has been developed for Ubuntu 22.04, but you are currently using a Debian 10 machine. To make this possible, we will use an [Apptainer](https://computing.ee.ethz.ch/Services/Apptainer) container. The Apptainer is already located in `/scratch/$USER`. To active it, you can run:
+The requirements for Hands-on #4 are more complex, as you are expected to cross-compile an application for a RISC-V architecture. The SDK you will use has been developed for Ubuntu 22.04, but you are currently using a Debian 10 machine. To make this possible, we will use an [Apptainer](https://computing.ee.ethz.ch/Services/Apptainer) container. The Apptainer is already located in `/scratch/$USER`. Let's first copy the current repo to the same location:
+```
+cp -r /usr/itetnas04/data-scratch-01/$USER/data/efcl-school-t3 /scratch/$USER/
+```
+To activate the apptainer, you can run:
 ```
 cd /scratch/$USER/
 apptainer shell ubuntu
