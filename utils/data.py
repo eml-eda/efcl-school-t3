@@ -1,10 +1,110 @@
 import random
 import numpy as np
+import pandas as pd
 from itertools import groupby
+from scipy.signal import butter, lfilter
 
 import torch
 from torch.utils.data import Dataset
 
+
+def hp_filter(data, order, cutoff_frequency, sampling_frequency):
+    # compute the normalize cutoff frequency and apply butter() and lfilter() to filter your data
+    normalized_cutoff = cutoff_frequency / (sampling_frequency / 2)
+    b, a = butter(order, normalized_cutoff, btype="highpass")
+    return lfilter(b, a, data, axis=0)
+
+
+def trim(data, labels):
+    segment_lengths = [sum(1 for _ in group) for _, group in groupby(labels)]
+    # eliminate most of the initial portion of the signal, where the trigger is zero, but the hand might not be yet at rest.
+    # Precisely, we keep only some seconds before the first gesture (equal to the length of the SECOND rest).
+    # Then, also eliminate all data after the last gesture, 
+    # where you might have moved your hand freely. 
+    start_index = segment_lengths[0] - segment_lengths[2]
+    end_index = data.shape[0] - segment_lengths[-1] + 1
+    data = data[start_index:end_index, :]
+    labels = labels[start_index:end_index]
+    return data, labels
+
+
+def normalize(data, min_values, max_values):
+    # normalize the data to [0:1]
+    rescaled_data = (data - min_values) / (max_values - min_values)
+    return rescaled_data
+
+
+def prepare_data(train_val_file, test_file, concatenate_all=False):
+    
+    print(f"Processing {train_val_file}")
+
+    # read session 1 data
+    df = pd.read_parquet(train_val_file)
+
+    # split data and labels
+    data = df.drop("Trigger", axis=1).values 
+    labels = df.Trigger.values.astype(int)
+
+    # apply filtering to the data 
+    filtered_data = hp_filter(data, order=4, cutoff_frequency=10.0, sampling_frequency=500)
+    
+    # trim the filtered data and labels
+    trimmed_data, trimmed_labels = trim(filtered_data, labels)
+
+    # split training and validation sets using get_repetitions_mask
+    # first call the function to isolate repetitions [0,3] (for training) and
+    # [4,4] (for validation). Then, use the mask as an index in the arrays
+    # to separate the two subsets
+    train_mask = get_repetitions_mask(trimmed_data, trimmed_labels, 0, 3)
+    val_mask = get_repetitions_mask(trimmed_data, trimmed_labels, 4, 4)
+    train_data = trimmed_data[train_mask]
+    train_labels = trimmed_labels[train_mask]
+    val_data = trimmed_data[val_mask]
+    val_labels = trimmed_labels[val_mask]
+
+    # REPEAT THE SAME STEPS FOR THE TEST SET
+    print(f"Processing {test_file}")
+
+    # read session 2 data (test set)
+    df = pd.read_parquet(test_file)
+
+    # split test data and test labels (expected: 2 lines)
+    data = df.drop("Trigger", axis=1).values 
+    labels = df.Trigger.values.astype(int)
+
+    # apply filtering to the test data (expected: 1 line)
+    filtered_data = hp_filter(data, order=4, cutoff_frequency=10.0, sampling_frequency=500)
+
+    # trim the filtered test data and labels (expected: 1 line)
+    trimmed_data, trimmed_labels = trim(filtered_data, labels)
+
+    # we don't need to mask anything since we use the whole session 2 as test set
+    test_data, test_labels = trimmed_data, trimmed_labels
+
+    # normalize all data arrays using the TRAINING SET's min and max values
+    train_min, train_max = train_data.min(axis=0), train_data.max(axis=0)
+    train_data = normalize(train_data, train_min, train_max)
+    val_data = normalize(val_data, train_min, train_max)
+    test_data = normalize(test_data, train_min, train_max)
+
+    # create windows for all three datasets
+    train_data, train_labels = windowing(train_data, train_labels)
+    val_data, val_labels = windowing(val_data, val_labels)
+    test_data, test_labels = windowing(test_data, test_labels)
+
+    # note: the concatenate_all option allows you to obtain splits in which:
+    # - train = train + test
+    # - val = val
+    # - test = train + test
+    # this is needed if you want to retrain on ALL DATA before deployment (which is usually a good idea).
+    # of course, in this case, the test accuracy shouldn't be considered as relevant.
+    # for now, leave it at False, then you might come back and set it to True before deployment.
+    if concatenate_all:
+        train_data = test_data = np.vstack((train_data, test_data))
+        train_labels = test_labels = np.hstack((train_labels, test_labels))
+    
+    return (train_data, train_labels), (val_data, val_labels), (test_data, test_labels), (train_min, train_max)
+    
 
 def worker_init_fn(worker_id):
     np.random.seed(23)
