@@ -287,7 +287,7 @@ if __name__ == "__main__":
                         help='Path to the json file with the values for rescaling.')
     parser.add_argument('--num_windows', type=int, default=3,
                         help='Number of windows to consider for averaging.')
-    parser.add_argument('--window_stride', type=int, default=0.5,
+    parser.add_argument('--window_stride', type=float, default=0.5,
                         help='stride between windows.')
     args = parser.parse_args()
     main(args)
